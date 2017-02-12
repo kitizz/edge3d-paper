@@ -53,7 +53,7 @@ sequence_name
 
 `edges` should be a directory of images with the edge response map of the original sequence. If Pipeline cannot find this directory, it will attempt to generate the edge maps using the Structured Forest Edge Detector in Matlab using images in the `seq` directory. If `seq` doesn't exist, it will generate the images from `video.mp4` using `avconv`.
 
-# Camera calibration
+### Camera calibration
 `cam.yaml` should contain the intrinsic camera calibration of the sequence. An example:
 ```
 fx: 1100.0
@@ -62,14 +62,14 @@ cx: 640.0
 cy: 360.0
 ```
 
-# Configuration
+### Configuration
 See the paper datasets for example configuration files. They set the values of the `Config` object passed to different stages of the pipeline. Important configurations are:
 
 - **frame_support**: The temporal window radius when looking for neighbor edge segments.
 - **min_inlier**: The minimum fraction of inliers in the RANSAC fitting for an edge to be considered good quality.
 - **min_neighbors**: The minimum number of neighbors to reciprocate a correspondence for an edge to be considered good quality
 
-# Bounding Rectangles
+### Bounding Rectangles
 I will soon update the code to make this optional. This currently a nice way to constrain the bounds of the voxel grid used to speed up look-up times of edge rays. It has no affect on the results, it simply helps increase the computational efficiency. An example:
 ```
 rects:
