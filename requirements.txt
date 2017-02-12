@@ -1,0 +1,11 @@
+# Basics
+ruamel.yaml
+plyfile
+networkx
+numpy
+metis
+psutil
+
+# SciKits
+scikit-image
+scikit-learn

@@ -1,0 +1,13 @@
+ply
+format binary_little_endian 1.0
+comment Kit Lib
+element vertex {V}
+property float x
+property float y
+property float z
+element face {F}
+property list uchar int vertex_indices
+element edge {E}
+property int vertex1
+property int vertex2
+end_header
