@@ -21,15 +21,17 @@ def matlab_edges(seq, nthreads=4):
         run(cmd, check=True, stdout=sys.stdout)
 
 
-def process_sequence(seq, skip):
+def process_sequence(seq):
     '''
     seq: Directory of sequence
-    skip: Sub sample the video frames by this amount.
     '''
+    config_path = os.path.join(seq, 'config.yaml')
+    config = Config.load(config_path)
+
+    skip = config.frame_subsample
     sub = 'rays_{}'.format(skip)
 
     # Make images and edges first if they don't exists
-
     edge_path = os.path.join(seq, 'edges')
     if not os.path.exists(edge_path):
         # Extract images from video first
@@ -47,14 +49,10 @@ def process_sequence(seq, skip):
         RaySoup.build_voxel_grid(seq, sub)
 
     cloud = RayCloud.load( cloud_path )
-
-    config_path = os.path.join(seq, 'config.yaml')
-    config = Config.load(
-        config_path,
-        eps=1/cloud.cam[0])
+    config.eps = 1/cloud.cam[0]
 
     # Classify edges and save out
-    ClassifyEdges.detect(seq, sub, cloud, config, imtype='png')
+    # ClassifyEdges.detect(seq, sub, cloud, config, imtype='png')
 
     # Reconstruct Non-Persistent Edges
     OcclusionEdges.reconstruct(seq, sub, cloud, config)
@@ -65,4 +63,4 @@ def process_sequence(seq, skip):
 
 if __name__ == '__main__':
     seq = sys.argv[1]
-    process_sequence(seq, skip=2)
+    process_sequence(seq)

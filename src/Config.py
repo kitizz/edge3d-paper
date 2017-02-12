@@ -6,6 +6,7 @@ import ruamel.yaml as yaml
 _float = float32
 
 _spec = [
+    ('frame_subsample', int64),
     ('frame_support', int64),
     ('angle_support', _float),
     ('planar_support', _float),
@@ -28,6 +29,7 @@ _spec = [
 @jitclass(_spec)
 class Config(object):
     def __init__(self):
+        self.frame_subsample = 1
         self.frame_support = 600
         self.angle_support = 0.2
         self.planar_support = 0.25

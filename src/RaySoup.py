@@ -40,10 +40,11 @@ def extract_rays(seq, sub, skip=2, max_frame=None, imtype='png'):
     frames, boxes = IO.read_rects( os.path.join(seq, 'rects.yaml') )
     cloud.apply_bounding_boxes(frames, boxes)
 
+    print("Extracting Edge Rays")
     for f in range(0, max_frame, skip):
         if not valid_bool[f]:
             continue
-        print("\rFrame: {} of {}".format(f, F), end=' '*16, flush=True)
+        print("\r\tFrame: {} of {}".format(f, F), end=' '*16, flush=True)
 
         E = IO.imread( paths[f] )
         pts, labels = Contours.find_contours_edge(E, low=20, high=35, min_length=30)
