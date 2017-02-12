@@ -27,7 +27,7 @@ def video_to_images(seq, fps=None):
         print("Converting video into image sequence in {}".format(image_path))
         os.makedirs(image_path)
         seq_out = os.path.join(image_path, '%05d.jpg')
-        cmd = ['/usr/local/bin/avconv', '-i', vid, '-vf', "format=yuv420p", '-q:v', '1']
+        cmd = ['avconv', '-i', vid, '-vf', "format=yuv420p", '-q:v', '1']
         if fps is not None:
             cmd.extend(['-vf', 'fps={}'.format(fps)])
 
