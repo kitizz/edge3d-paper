@@ -19,6 +19,7 @@ import psutil
 def extract_rays(seq, sub, skip=2, max_frame=None, imtype='png'):
     edge_dir = os.path.join(seq, 'edges', '*.'+imtype)
     paths = glob.glob(edge_dir)
+    paths.sort()
     F = len(paths)
 
     cam = IO.read_cam_param( os.path.join(seq, 'cam.yaml') )
